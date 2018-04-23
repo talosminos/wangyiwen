@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="loginAction" class="tk.wangyiwen.action.LoginAction">
+		<property name="loginService" ref="loginService"></property>
+	</bean>
+	<bean id="loginService" class="tk.wangyiwen.service.LoginService">
+		<property name="userDao" ref="tk.wangyiwen.dao.UserDaoImpl"></property>
+	</bean>
+</beans>
+    
+    

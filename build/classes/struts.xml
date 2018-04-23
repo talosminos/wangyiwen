@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<constant name="struts.devMode" value="false"></constant>
+	
+	<package name="default" namespace="/" extends="struts-default">
+		<global-results>
+			<result name="error" >/jsp/error.jsp</result>
+		</global-results>
+		<action name="login" class="loginAction">
+			<!-- 定义三个逻辑视图和资源之间的映射 -->
+			<result name="success" >/jsp/welcome.jsp</result>
+			<result name="login" >/jsp/index.jsp</result>
+		</action>
+
+		<action name="register" class="registerAction">
+			<!-- 定义三个逻辑视图和资源之间的映射 -->
+			<result name="success"  >/jsp/welcome.jsp</result>
+			<result name="error" >/jsp/register.jsp</result>
+		</action>
+		<action name="index" class="indexAction">
+			<result name="success">/jsp/login.jsp</result>
+		</action>
+	</package>
+</struts>

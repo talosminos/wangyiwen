@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/tx  
+    http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<!-- 配置C3P0数据库连接池 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/ssh"></property>
+		<property name="user" value="root"></property>
+		<property name="password" value="minos"></property>
+	</bean>
+
+	<!-- 配置SessionFactory -->
+	<bean name="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<!-- 指定hibernate配置文件 -->
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocations" value="classpath:hibernate.cfg.xml"></property>
+	</bean>
+	<!-- 配置事物 -->
+	<bean name="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 开启事物扫描 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<!-- 配置hibernateTemplate -->
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- 配置userDao -->
+	<bean id="userDao" class="tk.wangyiwen.dao.UserDaoImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+	<!-- 配置userService -->
+		<bean id="userService" class="tk.wangyiwen.service.UserService">
+		<property name="userDao" ref="userDao"></property>
+	</bean>
+	<!-- 配置userAction -->
+	<bean id="userAction" class="tk.wangyiwen.action.UserAction" scope="prototype">
+		<property name="userService" ref="userService"></property>
+	</bean>
+	
+	<!-- 配置loginService -->
+	<bean id="loginService" class="tk.wangyiwen.service.LoginService">
+		<property name="userDao" ref="userDao"></property>
+	</bean>
+	<!-- 配置loginAction -->
+	<bean id="loginAction" class="tk.wangyiwen.action.LoginAction" scope="prototype">
+		<property name="loginService" ref="loginService"></property>
+	</bean>
+	
+	<!-- 配置registerService -->
+	<bean id="registerService" class="tk.wangyiwen.service.RegisterService" scope="prototype">
+		<property name="userDao" ref="userDao"></property>
+	</bean>
+	<!-- 配置loginAction -->
+	<bean id="registerAction" class="tk.wangyiwen.action.RegisterAction" scope="prototype">
+		<property name="registerService" ref="registerService"></property>
+	</bean>
+	
+	<!-- 配置indexAction -->
+	<bean id="indexAction" class="tk.wangyiwen.action.IndexAction" scope="prototype">
+	</bean>
+	
+	
+		
+	<!-- 引入其他配置文件 -->
+<!-- 	<import resource="classpath:index.xml"/> -->
+<!-- 	<import resource="classpath:demo.xml"/> -->
+</beans>
