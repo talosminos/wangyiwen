@@ -13,7 +13,7 @@
 		</global-results>
 		<action name="login" class="loginAction">
 			<!-- 定义三个逻辑视图和资源之间的映射 -->
-			<result name="success" >/jsp/welcome.jsp</result>
+			<result name="success" >/jsp/home.jsp</result>
 			<result name="login" >/jsp/index.jsp</result>
 		</action>
 
