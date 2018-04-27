@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="tk.wangyiwen.entity.Album" table="t_album">
+		<id name="albumId" column="albumId">
+			<generator class="native"></generator>
+		</id>
+		<property name="albumName" column="albumName"></property>
+		<property name="albumDescribe" column="albumDescribe"></property>
+		<many-to-one name="user" column="uaid" class="tk.wangyiwen.entity.User"></many-to-one>
+		<set name="photoSet">
+			<key column="apid"></key>
+			<one-to-many class="tk.wangyiwen.entity.Photo"></one-to-many>
+		</set>
+	</class>
+</hibernate-mapping>

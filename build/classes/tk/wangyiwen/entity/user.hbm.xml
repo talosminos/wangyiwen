@@ -4,8 +4,18 @@
 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<class name="tk.wangyiwen.entity.User" table="t_user">
-		<id name="username" column="username"></id>
+		<id name="username" column="username">
+		</id>
 		<property name="nickname" column="nickname"></property>
 		<property name="password" column="password"></property>
+		<!-- 使用set标签表示所有相册 -->
+		<set name="albumSet">
+			<!-- 一对多表，有外建
+				hibernate机制，双向维护外键，在一和多那方都配置外键
+			 -->
+			 <key column="uaid"></key>
+			 <!-- 用户所有的相册 -->
+			 <one-to-many class="tk.wangyiwen.entity.Album"/>
+		</set>
 	</class>
 </hibernate-mapping>

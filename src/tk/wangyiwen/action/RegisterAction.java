@@ -18,15 +18,18 @@ public class RegisterAction extends ActionSupport implements ModelDriven<User> {
 	private RegisterService registerService;
 
 	public String execute() throws Exception {
+		if(user.getUsername() == null) {
+			return ERROR;
+		}
 		if (user.getUsername().isEmpty()) {
 			prompt = "用户名不能为空";
 			return ERROR;
 		}
-		if (user.getNickname().isEmpty()) {
+		if (user.getNickname() == null || user.getNickname().isEmpty()) {
 			prompt = "昵称不能为空";
 			return ERROR;
 		}
-		if (user.getPassword().isEmpty()) {
+		if (user.getPassword() == null ||user.getPassword().isEmpty()) {
 			prompt = "密码不能为空";
 			return ERROR;
 		}

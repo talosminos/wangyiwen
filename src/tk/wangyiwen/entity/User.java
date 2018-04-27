@@ -1,4 +1,7 @@
 package tk.wangyiwen.entity;
+
+import java.util.Set;
+
 /**
  * 定义实体类User
  * @author Administrator
@@ -13,7 +16,14 @@ public class User {
 	private String username;
 	private String nickname;
 	private String password;
+	private Set<Album> albumSet;
 	
+	public Set<Album> getAlbumSet() {
+		return albumSet;
+	}
+	public void setAlbumSet(Set<Album> albumSet) {
+		this.albumSet = albumSet;
+	}
 	public String getUsername() {
 		return username;
 	}

@@ -18,6 +18,8 @@ public class LoginAction extends ActionSupport implements ModelDriven<User> {
 	private LoginService loginService;
 	
 	public String execute() throws Exception {
+		if(user.getUsername()==null)
+			return "login";
 		User u  = loginService.login(user);
 		if(u!=null) {
 			//登录成功，把用户登录信息存入session中
